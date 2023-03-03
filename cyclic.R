@@ -4,10 +4,20 @@ library(colourlovers)
 library(reshape2)
 library(cowplot)
 
-tidyverse_conflicts(only = NULL)
-
 # Import C++ code
 sourceCpp('cyclic_funs.cpp')
+
+#################################################################
+# Functions
+#################################################################
+
+# This function creates a w x h matrix of random states
+initial_grid <- function(s, w, h){
+  matrix(sample(x = seq_len(s)-1,
+               size = w *h,
+               replace = TRUE),
+         nrow = h,
+         ncol = w)}
 
 # This function implements neighborhoods
 # You can add your own
@@ -73,4 +83,3 @@ ggplot(data = df, aes(x = x, y = y, fill = v)) +
   scale_y_continuous(expand = c(0,0)) + 
   scale_x_continuous(expand = c(0,0)) +
   theme_nothing() 
-
